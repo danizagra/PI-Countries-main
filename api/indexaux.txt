@@ -1,0 +1,20 @@
+const { Sequelize } = require('sequelize')
+const { dbUser, dbName, dbPort, dbHost, dbPassword } = require('./src/utils/config/index')
+
+const CountryFactory = require('./src/models/country')
+const ActivityFactory = require('./src/models/activity')
+
+const sequelize = new Sequelize(`postgres://${dbUser}:${dbPassword}@${dbHost}/${dbName}`)
+
+const Country = CountryFactory(sequelize)
+const Activity = ActivityFactory(sequelize)
+
+//relaciones 
+/* Country.belongsToMany(Activity,{Country})
+Activity.belongsToMany(Country) */
+
+module.esports = {
+      conn: sequelize,
+      Country,
+      Activity
+}
