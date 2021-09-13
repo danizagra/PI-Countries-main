@@ -5,11 +5,14 @@ import {
     ORDER_COUNTRIES,
     ORDER_ACTIVITIES,
     MIX,
+    SEARCH_COUNTRIES,
+    ONE_COUNTRY,
 } from "../actions/countryActions";
 
 const initialState = {
     countries: [],
     countriesComplete: [],
+    aux: [],
     activities: [],
 };
 const reducer = (state = initialState, action) => {
@@ -17,7 +20,7 @@ const reducer = (state = initialState, action) => {
         case MIX:
             return {
                 ...state,
-                countries: [...state.countriesComplete],
+                countries: state.countriesComplete,
             };
 
         case GET_COUNTRIES:
@@ -25,11 +28,37 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 countries: action.payload,
                 countriesComplete: action.payload,
+                /* aux: action.payload, */
             };
         case GET_ACTIVITIES:
             return {
                 ...state,
                 activities: action.payload,
+            };
+        case "POST_COUNTRY":
+            return {
+                ...state,
+            };
+
+        case ONE_COUNTRY:
+            return {...state, aux: action.payload};
+
+        case SEARCH_COUNTRIES:
+            let search = state.countries;
+
+            search = search.filter((e) =>
+                e.name.toLowerCase().includes(action.payload.toLowerCase())
+            );
+            /*   if (action.payload.length === '') {
+                return {
+                    ...state,
+                    countries:state.aux
+                }
+            } */
+
+            return {
+                ...state,
+                countries: search,
             };
 
         case FILTER_BY_CONTINENT:
@@ -40,6 +69,11 @@ const reducer = (state = initialState, action) => {
                 countries = countriesComplete;
             }
 
+            if (action.payload.length === 0) {
+                return {
+                    ...state,
+                };
+            }
             const statusFilter =
                 action.payload === "All"
                     ? countries
@@ -52,6 +86,11 @@ const reducer = (state = initialState, action) => {
         case ORDER_COUNTRIES:
             let order = state.countries;
 
+            /*  if (action.payload === 'none') {
+                      console.log('entraaaa')
+                      order = state.aux
+                      console.log(order,'el order')
+                } */
             if (action.payload === "asc") {
                 order = order.sort((a, b) => {
                     if (a.name > b.name) return 1;
@@ -73,22 +112,21 @@ const reducer = (state = initialState, action) => {
                 countries: order,
             };
         case ORDER_ACTIVITIES:
-            let countriesAct = state.countriesComplete;
+            let countriesAct = state.countries;
             let createdFilter = [];
             let result = [];
 
-            if (action.payload === "false" && state.countries.length <= 2) {
-                return {
-                    ...state,
-                    countries: state.countriesComplete,
-                };
-            }
             if (action.payload === "false") {
                 return {...state};
             }
             createdFilter = countriesAct.filter(
                 (el) => el.Activities.length > 0
             );
+            if (action.payload.length === 0) {
+                return {
+                    ...state,
+                };
+            }
 
             for (let i = 0; i < createdFilter.length; i++) {
                 for (let j = 0; j < createdFilter[i].Activities.length; j++) {
@@ -99,6 +137,7 @@ const reducer = (state = initialState, action) => {
                     }
                 }
             }
+
             if (result.length === 0) {
                 return {
                     ...state,

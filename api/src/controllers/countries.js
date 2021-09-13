@@ -34,6 +34,7 @@ async function getAllCountries(req, res, next) {
 }
 
 function findIdCountry(req, res, next) {
+    console.log('entra al id')
     Country.findByPk(req.params.id,{include: Activity})
         .then((character) => res.send({character}))
         .catch((err) => next(err));

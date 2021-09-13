@@ -1,6 +1,4 @@
 import {useEffect, useState} from "react";
-/* import axios from "axios";
-import {COUNTRY_URL} from "../../utils/index"; */
 import {useDispatch, useSelector} from "react-redux";
 import {
     getCountries,
@@ -13,16 +11,19 @@ import {
 import {Link} from "react-router-dom";
 import Card from "../Card";
 import Paginado from "../Paginado/index";
+import Nav from "../nav/index";
+import style from "./home.module.css";
+
 const aux = [];
-function CountryCards(/* { countries, getCountries } */) {
+function CountryCards() {
+    const dispatch = useDispatch();
     const countries = useSelector((state) => state.countries);
     const activities = useSelector((state) => state.activities);
 
-    const activitiesMap = Array.from(new Set(activities.map((e) => e.name)));
+    console.log(activities, "<------- laputa actividad");
 
-    const [order, setOrder] = useState("");
-    const dispatch = useDispatch();
-    /*  console.log(aux, "<---- el array del principio"); */
+    //Verifico todas las actividades para no REPETIR
+    const activitiesMap = Array.from(new Set(activities.map((e) => e.name)));
 
     const [actividad, setActividad] = useState("");
     const [continentes, setContinentes] = useState("");
@@ -30,7 +31,7 @@ function CountryCards(/* { countries, getCountries } */) {
 
     //Lógica Paginado
     const [currentPage, setCurrentPage] = useState(1);
-    const [countriesPerPage, setCountriesPerPage] = useState(10);
+    const [countriesPerPage /* , setCountriesPerPage */] = useState(9);
     const indexOfLastCountry = currentPage * countriesPerPage; //
     const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
     const currentCountries = countries.slice(
@@ -43,6 +44,7 @@ function CountryCards(/* { countries, getCountries } */) {
 
     useEffect(() => {
         dispatch(getCountries());
+        dispatch(getActivity());
     }, [dispatch]);
 
     function handleClick(e) {
@@ -52,7 +54,6 @@ function CountryCards(/* { countries, getCountries } */) {
 
     function preFilter(e) {
         aux.push(e.target.value);
-        console.log(aux, ">--- El array");
     }
 
     useEffect(() => {
@@ -61,7 +62,7 @@ function CountryCards(/* { countries, getCountries } */) {
         dispatch(orderCountries(order2));
         dispatch(getActivity());
         dispatch(orderActivities(actividad));
-    }, [continentes, order2, actividad]);
+    }, [continentes, order2, actividad, dispatch]);
 
     function handleActivities(e) {
         if (e.target.checked) {
@@ -74,114 +75,105 @@ function CountryCards(/* { countries, getCountries } */) {
 
     function handleFilterStatus(e) {
         setContinentes(e.target.value);
-        /*  if (e.target.checked === true && e.target.value === "activity") {
-            return dispatch(orderActivities(e.target.value));
-        }
-        if (e.target.checked === false && e.target.value === "activity") {
-            let filter = aux[aux.length - 1];
-            if (!filter) return dispatch(getCountries());
-            else return dispatch(filterCountryByContinent(filter));
-        }
-        console.log("Siguioooooo");
-        dispatch(filterCountryByContinent(e.target.value)); */
     }
 
     function handleOrder(e) {
         setOrder2(e.target.value);
-        /*  if (e.target.value === "none") {
-            let filter2 = aux[aux.length - 1];
-
-            return dispatch(filterCountryByContinent(filter2));
-        }
-        e.preventDefault();
-        dispatch(orderCountries(e.target.value));
-        setCurrentPage(1);
-        setOrder(`Ordenado ${e.target.value}`); */
     }
 
     return (
-        <div>
-            <Link to="/activity"> Create Activity</Link>
-            <button onClick={(e) => handleClick(e)}>Cargar los paises</button>
+        <div className={style.container}>
+            <div className={style.filter}>
+                <div className={style.search}>
+                <Nav />
+                </div>
+                <div className={style.create}>
+                    <Link to="/activity"> Create Activity</Link>
+                    <button className={style.button_charge} onClick={(e) => handleClick(e)}>
+                        Cargar los paises
+                    </button>
+                </div>
+                <div className={style.order}>
+                    <div className={style.Filter_name}>
+                        <h3>Filters</h3>
+                    </div>
+                    <div className={style.Buttons_filter}>
+                    <select
+                        onChange={(e) => {
+                            handleOrder(e);
+                        }}
+                    >
+                        <option value="none">None</option>
+                        <option value="asc">Ascendente</option>
+                        <option value="desc">Descendente</option>
+                    </select>
 
-            <div>
-                <select
-                    onChange={(e) => {
-                        handleOrder(e);
-                    }}
-                >
-                    <option value="none">None</option>
-                    <option value="asc">Ascendente</option>
-                    <option value="desc">Descendente</option>
-                </select>
+                    <select
+                        onChange={(e) => {
+                            preFilter(e);
+                            handleFilterStatus(e);
+                        }}
+                    >
+                        <option value="All">All</option>
+                        <option value="Americas">America</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Oceania">Oceania</option>
+                        <option value="Africa">Africa</option>
+                    </select>
+                    </div>
+                </div>
 
-                <select
-                    onChange={(e) => {
-                        preFilter(e);
-                        handleFilterStatus(e);
-                    }}
-                >
-                    <option value="All">All</option>
-                    <option value="Americas">America</option>
-                    <option value="Europe">Europe</option>
-                    <option value="Asia">Asia</option>
-                    <option value="Oceania">Oceania</option>
-                    <option value="Africa">Africa</option>
-
-                    {/* <option value="activity">Actividad Turística</option> */}
-                </select>
-
-                <div>
-                    <input
+                {/*       <input
                         type="checkbox"
                         onClick={(e) => handleFilterStatus(e)}
                         value="activity"
                     ></input>
-                </div>
+                
+                <div ></div> */}
 
-                <div>
-                    {activitiesMap.map((el) => {
+                <div className={style.checkbox}>
+                    {activitiesMap?.map((el, i) => {
                         return (
-                            <div>
+                            <div key={i}
+                            >
                                 <p>{el}</p>
                                 <input
+                                    className={style.individual_check}
                                     type="checkbox"
                                     value={el}
                                     onClick={(e) => handleActivities(e)}
+                                    
                                 ></input>
                             </div>
                         );
                     })}
                 </div>
-
-                <Paginado
-                    countriesPerPage={countriesPerPage}
-                    countries={countries.length}
-                    paginado={paginado}
-                />
-                {currentCountries?.map((el) => {
-                    return (
-                        <div>
-                            <Link to={"/home/" + el.name}>
-                                <Card
-                                    name={el.name}
-                                    image={el.image}
-                                    continent={el.continent}
-                                />
-                            </Link>
-                        </div>
-                    );
-                })}
             </div>
-
-            {/* {countries &&countries.map((countries) => {
-                return (
-                    <div key={countries.name}>
-                        <p>{countries.name}</p>
-                        <img src={countries.image} alt="Countries papaaaaa" />
-                    </div>
-                );
-            })} */}
+            <div className={style.countries}>
+                <div className={style.country}>
+                    {currentCountries?.map((el) => {
+                        return (
+                            <div key={el.id}>
+                                <Link to={"/home/" + el.id}>
+                                    <Card
+                                        name={el.name}
+                                        image={el.image}
+                                        continent={el.continent}
+                                    />
+                                </Link>
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className={style.paginado}>
+                    <Paginado
+                        countriesPerPage={countriesPerPage}
+                        countries={countries.length}
+                        paginado={paginado}
+                    />
+                </div>
+            </div>
         </div>
     );
 }

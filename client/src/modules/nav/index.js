@@ -1,20 +1,41 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import stylesNav from './nav.module.css'
+import {useState, useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {
+    getNameCountries,
+    getCountries,
+} from "../../store/actions/countryActions";
+
+
 export function Nav() {
+    const dispatch = useDispatch();
+    const [name, setName] = useState("");
+
+    function handleInputChange(e) {
+        e.preventDefault();
+        setName(e.target.value);
+    }
+
+    useEffect(() => {
+        if (name.length === 0) {
+            dispatch(getCountries());
+        }
+        dispatch(getNameCountries(name));
+    }, [name, dispatch]);
+    /* function handleSubmit(e) {
+        e.preventDefault()
+        dispatch(getNameCountries(name))
+    } */
     return (
-          <header /* className={stylesNav.navbar} */>
-                
-                <div>Soy Nav</div>
-                <nav>
-                <ul /* className={stylesNav.list} */>
-                    <li /* className={stylesNav.listitem} */>
-                       Home
-                       Create Activities
-                    </li>
-                </ul>
-                </nav>
-        </header>
+        <div>
+            <input
+                type="text"
+                placeholder="Countries Search"
+                onChange={(e) => {
+                    handleInputChange(e);
+                }}
+            ></input>
+        </div>
     );
 }
 

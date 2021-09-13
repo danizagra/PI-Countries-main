@@ -1,10 +1,12 @@
 import axios from "axios";
-import {COUNTRY_URL, ACTIVITY_URL} from "../../utils/index";
+import {COUNTRY_URL, ACTIVITY_URL, SEARCH_URL} from "../../utils/index";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
 export const ORDER_COUNTRIES = "ORDER_COUNTRIES";
 export const ORDER_ACTIVITIES = "ORDER_ACTIVITIES";
+export const SEARCH_COUNTRIES = "SEARCH_COUNTRIES";
+export const ONE_COUNTRY = "ONE_COUNTRY";
 export const MIX = "MIX";
 
 export function getCountries() {
@@ -20,6 +22,45 @@ export function getActivity() {
         return axios.get(ACTIVITY_URL).then((response) => {
             dispatch({type: GET_ACTIVITIES, payload: response.data});
         });
+    };
+}
+
+export function postActivity(payload) {
+    return async function (dispatch) {
+        
+        const response = await axios.post(ACTIVITY_URL, payload)
+        /* console.log(response, '<<<< response del action') */
+        return response
+    }
+}
+
+export function oneCountry(payload) {
+    return async function (dispatch) {
+        try {
+            const json = await axios.get(SEARCH_URL + payload)
+            return dispatch({
+                type:ONE_COUNTRY, payload: json.data
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+export function getNameCountries(payload) {
+   /*  return async function (dispatch) {
+        try {
+            const json = await axios.get(SEARCH_URL + name)
+            return dispatch({
+                type:'SEARCH_COUNTRIES', payload: json.data
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    } */
+    return {
+        type: "SEARCH_COUNTRIES",
+        payload,
     };
 }
 
@@ -40,10 +81,11 @@ export function orderCountries(payload) {
 }
 
 export function orderActivities(payload) {
-     
+    
     return {
         type: "ORDER_ACTIVITIES",
-        payload,
+          payload,
+       
     };
 }
 

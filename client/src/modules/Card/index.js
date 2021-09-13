@@ -1,14 +1,19 @@
-import React from 'react'
-
+import React from "react";
+import styles from "./card.module.css";
 function Card({name, image, continent}) {
-      return (
-            <div>
-                  <h3>{name}</h3>
-                  <h5>{continent}</h5>
-                  <img src={image} alt="Countries papaaaaa" width='200px' height='100px'/>
+    return (
+        <div className={styles.all}>
+            <div className={styles.letras}>
+                <h5 className={styles.country}>{name}</h5>
+                <h5 className={styles.region}>Continent: {continent}</h5>
             </div>
-      )
+            <img
+                className={styles.image}
+                src={image}
+                alt="Countries papaaaaa" /* width='16vw' height='18vw' */
+            />
+        </div>
+    );
 }
 
-export default Card
-
+export default Card;
