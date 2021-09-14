@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect /* , useState */} from "react";
 import {oneCountry} from "../../store/actions/countryActions";
 import {Link} from "react-router-dom";
-
+import style from "./detail.module.css";
 function OneCountry(prop) {
     const aux = useSelector((state) => state.aux);
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ function OneCountry(prop) {
     useEffect(() => {
         dispatch(oneCountry(id));
     }, [dispatch, id]);
-      
+
     function stringToTime(e) {
         let aux = e.toString();
         let a = aux.split("").reverse();
@@ -32,47 +32,75 @@ function OneCountry(prop) {
         return result;
     }
     return (
-          <div>
-                <Link to="/home">
-                            <button>X</button>
+        <div className={style.container}>
+            <div >
+                <Link  to="/home">
+                    <button className={style.return}>X</button>
                 </Link>
-                
+            </div>
+            <div className={style.all}>
             {aux.map((el, i) => {
                 return (
-                    <div key={i}>
-                        
-                        <h3>{el.name}</h3>
-                        <img
-                            src={el.image}
-                            alt="Countries papaaaaa"
-                            width="200px"
-                            height="100px"
-                        />
-                        <label>Continent</label>
-                        <h5>{el.continent}</h5>
+                    <div className={style.container2} key={i}>
+                        <div>
+                            <img
+                                className={style.image}
+                                src={el.image}
+                                alt="Countries papaaaaa"
+                                /*      width="500px"
+                            height="100px" */
+                                /*  className={style.image} */
+                            />
+                        </div>
 
-                        <h5>{el.id}</h5>
-                        <h5>{el.capital}</h5>
-                        <h5>{el.subregion}</h5>
-                        <h5>{numberSeparate(el.area)}</h5>
-                        <h5>{numberSeparate(el.population)}</h5>
-                        {el.Activities.length === 0 ? (
-                            <h2>No hay actividades</h2>
-                        ) : (
-                            el.Activities.map((el, i) => {
-                                return (
-                                    <div key={i}>
-                                        <h5>{el.name}</h5>
-                                        <h5>{el.difficulty}</h5>
-                                        <h5>{stringToTime(el.duration)}</h5>
-                                        <h5>{el.season}</h5>
-                                    </div>
-                                );
-                            })
-                        )}
+                        <div className={style.information}>
+                            <div className={style.name}>
+                                <h3>{el.name}</h3>
+                            </div>
+
+                            <h5>Continent: {el.continent}</h5>
+                            <h5>{el.id}</h5>
+                            <h5>Capital: {el.capital}</h5>
+                            <h5>Subregion: {el.subregion}</h5>
+                            <h5>Area: {numberSeparate(el.area)}</h5>
+                            <h5>Population:{numberSeparate(el.population)}</h5>
+                        </div>
+                        <div className={style.activity}>
+                            {el.Activities.length === 0 ? (
+                                <h2>Doesn't exist activities 😢</h2>
+                            ) : (
+                                el.Activities.map((el, i) => {
+                                    return (
+                                        <div
+                                            className={style.activity2}
+                                            key={i}
+                                        >
+                                            <h5>
+                                                Activity:&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                                                {el.name}
+                                            </h5>
+                                            <h5>
+                                                Difficulty:&nbsp;&nbsp;&nbsp;&nbsp;
+                                                {el.difficulty}
+                                            </h5>
+                                            <h5>
+                                                Duration:
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                {stringToTime(el.duration)}
+                                            </h5>
+                                            <h5>
+                                                Season: &nbsp;&nbsp;&nbsp;&nbsp;
+                                                {el.season}
+                                            </h5>
+                                        </div>
+                                    );
+                                })
+                            )}
+                        </div>
                     </div>
                 );
             })}
+                </div>
         </div>
     );
 }

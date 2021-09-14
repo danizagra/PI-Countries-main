@@ -1,16 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Allison&display=swap");
 body {
- /*    background-image: url(../../img/landing.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-clip: border-box; */
-background-color: #1B262C;
+    background-color: #1b262c;
+}
+:root {
+    --bg: #3c465c;
+    --primary: #78ffcd;
+    --solid: #fff;
+    --btn-w: 10em;
+    --dot-w: calc(var(--btn-w) * 0.2);
+    --tr-X: calc(var(--btn-w) - var(--dot-w));
+}
+* {
+    box-sizing: border-box;
+}
+*:before,
+*:after {
+    box-sizing: border-box;
 }
 .title {
     font-family: "Allison", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 12vw;
-    color: #9d9d9d;
-    text-shadow: 2px 10px 10px #f4d58d;
+    color: #78ffcd;
+    text-shadow: 2px 5px 10px white;
+    position: relative;
+    margin:auto;
+  
+
 }
 .container {
     padding-top: 40px;
@@ -20,25 +35,86 @@ background-color: #1B262C;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-evenly;
+    /* border: 1px solid white; */
+    top:10vw;
 
     /* background-color:red; */
+
 }
 
 .button {
-    position: relative;
+    /*     position: relative;
     left: 13vw;
     bottom: 0;
-    /*  text-decoration: none; */
-    /*   padding: 10px; */
+
     font-weight: 600;
     font-size: 5vw;
     color: yellow;
     background-color: #9d9d9d;
     border-radius: 10px;
     border: 1px solid #0016b0;
-    opacity: 0.5;
+    opacity: 0.5; */
+    position: relative;
+    margin: 0 auto;
+    width: var(--btn-w);
+    color: var(--primary);
+    border: 0.15em solid var(--primary);
+    border-radius: 5em;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.3em;
+    line-height: 2em;
+    cursor: pointer;
 }
-.button:hover {
-    background-color: #4caf50; /* Green */
+.dot {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: var(--dot-w);
+    height: 100%;
+    border-radius: 100%;
+    transition: all 300ms ease;
+    display: none;
+}
+.dot:after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 0.4em);
+    top: -0.4em;
+    height: 0.8em;
+    width: 0.8em;
+    background: var(--primary);
+    border-radius: 1em;
+    border: 0.25em solid var(--solid);
+    box-shadow: 0 0 0.7em var(--solid), 0 0 2em var(--primary);
+}
+.button:hover .dot,
+.button:focus .dot {
+    animation: atom 2s infinite linear;
+    display: block;
+}
+@keyframes atom {
+    0% {
+        transform: translateX(0) rotate(0);
+    }
+    30% {
+        transform: translateX(var(--tr-X)) rotate(0);
+    }
+    50% {
+        transform: translateX(var(--tr-X)) rotate(180deg);
+    }
+    80% {
+        transform: translateX(0) rotate(180deg);
+    }
+    100% {
+        transform: translateX(0) rotate(360deg);
+    }
+}
+.text_button{
+      color:#78ffcd;
+      text-decoration: none;
+}
+/* .button:hover {
+    background-color: #4caf50;
     color: white;
-}
+} */

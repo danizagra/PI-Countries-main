@@ -5,7 +5,7 @@ import {
     getNameCountries,
     getCountries,
 } from "../../store/actions/countryActions";
-
+import styles from './nav.module.css'
 
 export function Nav() {
     const dispatch = useDispatch();
@@ -27,10 +27,11 @@ export function Nav() {
         dispatch(getNameCountries(name))
     } */
     return (
-        <div>
+        <div className={styles.search}>
             <input
+                className={styles.input}
                 type="text"
-                placeholder="Countries Search"
+                placeholder="Countries Search..."
                 onChange={(e) => {
                     handleInputChange(e);
                 }}

@@ -20,7 +20,7 @@ function CountryCards() {
     const countries = useSelector((state) => state.countries);
     const activities = useSelector((state) => state.activities);
 
-    console.log(activities, "<------- laputa actividad");
+  
 
     //Verifico todas las actividades para no REPETIR
     const activitiesMap = Array.from(new Set(activities.map((e) => e.name)));
@@ -38,10 +38,12 @@ function CountryCards() {
         indexOfFirstCountry,
         indexOfLastCountry
     );
+
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
+    
     useEffect(() => {
         dispatch(getCountries());
         dispatch(getActivity());
@@ -85,12 +87,20 @@ function CountryCards() {
         <div className={style.container}>
             <div className={style.filter}>
                 <div className={style.search}>
-                <Nav />
+                    <Nav />
                 </div>
                 <div className={style.create}>
-                    <Link to="/activity"> Create Activity</Link>
-                    <button className={style.button_charge} onClick={(e) => handleClick(e)}>
-                        Cargar los paises
+                    <Link to="/activity">
+                        <button className={style.button_charge}>
+                            {" "}
+                            Create Activity
+                        </button>
+                    </Link>
+                    <button
+                        className={style.button_charge}
+                        onClick={(e) => handleClick(e)}
+                    >
+                        Call 🌎
                     </button>
                 </div>
                 <div className={style.order}>
@@ -98,52 +108,41 @@ function CountryCards() {
                         <h3>Filters</h3>
                     </div>
                     <div className={style.Buttons_filter}>
-                    <select
-                        onChange={(e) => {
-                            handleOrder(e);
-                        }}
-                    >
-                        <option value="none">None</option>
-                        <option value="asc">Ascendente</option>
-                        <option value="desc">Descendente</option>
-                    </select>
+                        <select
+                            onChange={(e) => {
+                                handleOrder(e);
+                            }}
+                        >
+                            <option value="none">None</option>
+                            <option value="asc">Ascendente</option>
+                            <option value="desc">Descendente</option>
+                        </select>
 
-                    <select
-                        onChange={(e) => {
-                            preFilter(e);
-                            handleFilterStatus(e);
-                        }}
-                    >
-                        <option value="All">All</option>
-                        <option value="Americas">America</option>
-                        <option value="Europe">Europe</option>
-                        <option value="Asia">Asia</option>
-                        <option value="Oceania">Oceania</option>
-                        <option value="Africa">Africa</option>
-                    </select>
+                        <select
+                            onChange={(e) => {
+                                preFilter(e);
+                                handleFilterStatus(e);
+                            }}
+                        >
+                            <option value="All">All</option>
+                            <option value="Americas">America</option>
+                            <option value="Europe">Europe</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Oceania">Oceania</option>
+                            <option value="Africa">Africa</option>
+                        </select>
                     </div>
                 </div>
-
-                {/*       <input
-                        type="checkbox"
-                        onClick={(e) => handleFilterStatus(e)}
-                        value="activity"
-                    ></input>
-                
-                <div ></div> */}
 
                 <div className={style.checkbox}>
                     {activitiesMap?.map((el, i) => {
                         return (
-                            <div key={i}
-                            >
+                            <div className={style.individual_check} key={i}>
                                 <p>{el}</p>
                                 <input
-                                    className={style.individual_check}
                                     type="checkbox"
                                     value={el}
                                     onClick={(e) => handleActivities(e)}
-                                    
                                 ></input>
                             </div>
                         );
@@ -166,8 +165,20 @@ function CountryCards() {
                         );
                     })}
                 </div>
+
+                {/* <div className={style.controls}>
+                    <button className={style.disabled} disabled>
+                        &lt;
+                    </button>
+                    <button className={style.next}>&gt;</button>
+                    <div className={style.pag}>
+                        Pág.{currentPage}
+                    </div>
+                </div> */}
+
                 <div className={style.paginado}>
                     <Paginado
+                        currentPage={currentPage}
                         countriesPerPage={countriesPerPage}
                         countries={countries.length}
                         paginado={paginado}

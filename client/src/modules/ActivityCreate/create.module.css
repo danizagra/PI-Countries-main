@@ -1,0 +1,74 @@
+h1 {
+    color: white;
+}
+.return{
+     position: relative;
+     left:20vw;
+     border-radius:10px;
+     background-color: #BBE1FA;
+     padding: .375rem .75rem;
+  border: 1px solid #007bff;
+  border-radius: .25rem;
+  color: #007bff;
+  transition: color .15s ease-in-out,
+}
+.return:hover, .return:active, .return:focus{
+      color: #fff;
+  background-color: #007bff;
+}
+
+.form {
+    /*  display:flex;
+      flex-direction: column; */
+    display: grid;
+    grid-template-rows: 2fr 2fr 2fr 2fr 1fr 2fr;
+
+    position: relative;
+    margin: auto;
+   /*  border: 1px solid white; */
+    
+}
+.name {
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin: 2vw;
+  
+   
+}
+.difficulty {
+    color: white;
+   /*  border: 1px solid white; */
+   position: relative;
+   top:0.5vw;
+}
+.duration {
+    color: white;
+ /*    border: 1px solid white; */
+}
+.season {
+    color: white;
+  /*   border: 1px solid white; */
+}
+.select_countries {
+    margin: auto;
+   
+}
+.button {
+    display: inline;
+    margin: auto;
+    display: inline-block;
+  text-decoration: none;
+  padding: .375rem .75rem;
+  border: 1px solid #007bff;
+  border-radius: .25rem;
+  color: #007bff;
+  transition: color .15s ease-in-out,
+}
+.button:hover, .button:active, .button:focus{
+      color: #fff;
+  background-color: #007bff;
+}
+.danger{
+      color:red;
+}

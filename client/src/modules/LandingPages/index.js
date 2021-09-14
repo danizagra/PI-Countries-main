@@ -9,9 +9,12 @@ function LandingPage() {
 
             <div className={styles.button}>
                 <Link to="/home">
-                    <a>Come in</a>
+                   {/*  <a>Come in</a> */}
+                    <span className={styles.text_button}>Come in</span>
                 </Link>
+                <div className={styles.dot}></div>
             </div>
+           
         </div>
     );
 }
