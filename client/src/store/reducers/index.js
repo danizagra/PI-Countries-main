@@ -106,6 +106,22 @@ const reducer = (state = initialState, action) => {
                     return 0;
                 });
             }
+            if (action.payload === 'population_asc') {
+                order = order.sort((a, b) => {
+                    if (a.population < b.population) return 1;
+                    if (a.population > b.population) return -1;
+                    return 0;
+                });
+            }
+
+            if (action.payload === 'population_desc') {
+                order = order.sort((a, b) => {
+                    if (a.population > b.population) return 1;
+                    if (a.population < b.population) return -1;
+                    return 0;
+                });
+            }
+
 
             return {
                 ...state,

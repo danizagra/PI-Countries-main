@@ -1,26 +1,27 @@
-
-.controls{
-	color:white;
-	position:relative;
-	top:2px;
-	display:flex;
-	justify-content: space-evenly;
-	justify-items: space;
-  font-size: 1.1rem;
+.controls {
+    color: white;
+    position: relative;
+    top: 2px;
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: space;
+    font-size: 1.1rem;
 }
 
-.button{
-	display: inline;
-	margin: auto;
-	display: inline-block;
+.button {
+    display: inline;
+    margin: auto;
+    display: inline-block;
     text-decoration: none;
-    padding: .175rem .55rem;
+    padding: 0.175rem 0.55rem;
     border: 1px solid #007bff;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     color: #007bff;
-    transition: color .15s ease-in-out,
+    transition: color 0.15s ease-in-out;
 }
-.button:hover, .button:active, .button:focus{
-      color: #fff;
-  background-color: #007bff;
+.button:hover,
+.button:active,
+.button:focus {
+    color: #fff;
+    background-color: #007bff;
 }

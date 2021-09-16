@@ -85,6 +85,7 @@ function CountryCards() {
 
     return (
         <div className={style.container}>
+             <img className={style.img} alt="cucho" />
             <div className={style.filter}>
                 <div className={style.search}>
                     <Nav />
@@ -114,8 +115,10 @@ function CountryCards() {
                             }}
                         >
                             <option value="none">None</option>
-                            <option value="asc">Ascendente</option>
-                            <option value="desc">Descendente</option>
+                            <option value="asc">A - Z ⬇️</option>
+                            <option value="desc">Z - A ⬆️</option>
+                            <option value='population_asc'> Population ASCENDING </option>
+                            <option value='population_desc'> Population DESCENDING</option>
                         </select>
 
                         <select

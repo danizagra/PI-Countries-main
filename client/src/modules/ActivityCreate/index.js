@@ -8,14 +8,16 @@ import {
     mix,
 } from "../../store/actions/countryActions";
 import {useDispatch, useSelector} from "react-redux";
-const arrayId = [];
+let arrayId = [];
+const arrayseason = [];
+
 function CreateActivity() {
     const dispatch = useDispatch();
     const history = useHistory();
     const countries = useSelector((state) => state.countriesComplete);
     const [arrayCreate, setArrayCreate] = useState([]);
-      const [errors, setErrors] = useState({});
-      const [validateerror, setValidate] = useState(false);
+    const [errors, setErrors] = useState({});
+    const [validateerror, setValidate] = useState(false);
     const [input, setInput] = useState({
         name: "",
         difficulty: "",
@@ -31,10 +33,6 @@ function CreateActivity() {
     }, [dispatch]);
 
     function handleCreate(e) {
-        /* arrayCreate.push(e.target.text); */
-
-        arrayId.push(e.target.value);
-
         if (!e.target.text) return setArrayCreate([...arrayCreate]);
         if (arrayCreate.includes(e.target.text))
             return setArrayCreate([...arrayCreate]);
@@ -45,6 +43,13 @@ function CreateActivity() {
         setArrayCreate(arrayCreate.filter((el) => el !== e.target.value));
     }
     function handleChange(e) {
+        if (e.target.name === "country") {
+            arrayId.push(e.target.value);
+        }
+
+        if (e.target.name === "season") {
+            arrayseason.push(e.target.value);
+        }
         setInput({
             ...input,
             [e.target.name]: e.target.value,
@@ -77,41 +82,55 @@ function CreateActivity() {
         alert("The activities were created ✅");
         history.push("/home");
     }
-       /* let Validate = false; */
+    /* let Validate = false; */
     function validate(input = "") {
         let errors = {};
-        let arrayErrors = ["name", "difficulty",'duration'];
-       
+        let arrayErrors = [
+            "name",
+            "difficulty",
+            "duration",
+            "season",
+            "country",
+        ];
+
         if (!input.name) {
             errors.name = "name is required";
         }
         if (!input.difficulty) {
             errors.difficulty = "Number between 1 - 5 is required";
         }
-          if (!input.duration) {
-              errors.duration = "Duration is required";
-          }
-       /*    if (!input.season) {
-            errors.duration = "Season is required";
-        }  */
-          
-          
+        if (!input.duration) {
+            errors.duration = "Duration is required";
+        }
+
+        if (arrayseason.length === 0) {
+            errors.season = "Season is required";
+        }
+        if (arrayId.length === 0) {
+            errors.country = "Country is required";
+        }
+
         for (let i = 0; i < arrayErrors.length; i++) {
             setValidate(false);
             if (errors.hasOwnProperty(arrayErrors[i])) {
-               
                 setValidate(true);
             }
         }
-          
-        
+
         return errors;
+    }
+
+    function reset(e) {
+        arrayId = [];
     }
 
     return (
         <div>
+            <img className={style.img} alt="cucho" />
             <Link to="/home">
-                <button className={style.return}>X</button>
+                <button onClick={(e) => reset(e)} className={style.return}>
+                    X
+                </button>
             </Link>
             <h1>What do you want to do ?</h1>
             <form className={style.form} onSubmit={(e) => post(e)}>
@@ -153,12 +172,12 @@ function CreateActivity() {
                         name="duration"
                         value={input.duration}
                         onChange={(e) => handleChange(e)}
-                            />
-                        {errors.duration && (
+                    />
+                    {errors.duration && (
                         <p className={style.danger}>
                             &nbsp;&nbsp;{errors.duration}
                         </p>
-                    )}    
+                    )}
                 </div>
                 <div className={style.season}>
                     <label>Season&nbsp;&nbsp;&nbsp;</label>
@@ -179,11 +198,15 @@ function CreateActivity() {
                         <option name="season" value="Fall">
                             Fall 🍁{" "}
                         </option>
-                            </select>
-                            
-                        
+                    </select>
 
+                    {errors.season && (
+                        <p className={style.danger}>
+                            &nbsp;&nbsp;{errors.season}
+                        </p>
+                    )}
                 </div>
+
                 <select
                     className={style.select_countries}
                     onClick={(e) => handleCreate(e)}
@@ -198,27 +221,38 @@ function CreateActivity() {
                     ))}
                 </select>
 
-                {validateerror===true ? (
+                {errors.country && (
+                    <label className={style.danger}>
+                        &nbsp;&nbsp;{errors.country}
+                    </label>
+                )}
+
+                {validateerror === true ? (
                     <button className={style.button} type="submit" disabled>
-                        Post
+                        Post ❌
                     </button>
                 ) : (
                     <button className={style.button} type="submit">
-                        Post +
+                        Post ✅
                     </button>
                 )}
-
             </form>
-            {arrayCreate?.map((el, i) => {
-                return (
-                    <div key={i}>
-                        <label>{el}</label>
-                        <button value={el} onClick={(e) => handleDelete(e)}>
-                            X
-                        </button>
-                    </div>
-                );
-            })}
+            <div className={style.create}>
+                {arrayCreate?.map((el, i) => {
+                    return (
+                        <div key={i} className={style.create_individual}>
+                            <label>{el} &nbsp; &nbsp;</label>
+                            <button
+                                className={style.create_delete}
+                                value={el}
+                                onClick={(e) => handleDelete(e)}
+                            >
+                                ❌
+                            </button>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }

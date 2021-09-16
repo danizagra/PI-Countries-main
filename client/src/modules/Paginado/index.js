@@ -8,7 +8,10 @@ function Paginado({countriesPerPage, countries, paginado, currentPage}) {
     }
    
     return (
+        
         <section className={style.paginacion}>
+            
+
             <div className={style.controls}>
                 <button className={style.button} onClick={() => paginado(currentPage=1)}>First Page</button>
                 {currentPage === 1 ? (

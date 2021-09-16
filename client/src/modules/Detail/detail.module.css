@@ -1,19 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+.img {
+    background-image: url(../../img/detail.jpg);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -2;
+    width: 100%;
+    height: 100vh;
+    top: -70px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
 .container {
-   
-      position: relative;
-      top:70px;
+    position: relative;
+    top: 70px;
     color: white;
 
     text-decoration: none;
-    /*  width: 100%;
-    height: 100%; */
+
     display: flex;
     flex-direction: column;
 }
-.all {
+/* .all {
     
-}
+} */
 .return {
     text-decoration: none;
     padding: 0.375rem 0.75rem;
@@ -22,9 +33,7 @@
     color: #007bff;
     transition: color 0.15s ease-in-out;
     position: relative;
-    left:200px;
-   /*  display: inline;
-    appearance: none; */
+    left: 200px;
 }
 .return:hover,
 .button:active,
@@ -34,64 +43,46 @@
 }
 
 .image {
-    opacity: 0.3;
-   
+    opacity: 0.5;
 
     z-index: -1;
 
     width: 80%;
-    height: 300px;
+    height: 200px;
 
     border-radius: 40px;
 }
 .container2 {
-    /*   background-color: red; */
     width: 80%;
     height: 500px;
     margin: auto;
-  
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-
-  /*   background: rgba(255, 250, 39, 0.15);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 10px; */
 }
 .information {
-    /* display: grid; */
-/*     grid-template-rows: 1fr 1fr 1fr 1fr;
-    align-items: stretch;
-
-    grid-row-gap: 1px; */
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 21px;
 }
 
 .name {
     font-size: 50px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
 }
 
-.activity {
-    /* 
-      background: rgba( 2, 34, 181, 0.25 );
-      box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-      backdrop-filter: blur( 20px );
-      -webkit-backdrop-filter: blur( 20px );
-      border-radius: 10px; */
-}
+/* .activity {
+   
+} */
 
 .activity2 {
-    background: rgba(2, 34, 181, 0.25);
-    box-shadow: 0 12px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(30px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     width: 50%;
     position: relative;
     left: 100px;
-    font-family: 'Source Sans Pro', sans-serif;
-
-    
+    font-family: "Source Sans Pro", sans-serif;
 }

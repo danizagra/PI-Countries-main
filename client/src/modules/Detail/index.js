@@ -33,6 +33,7 @@ function OneCountry(prop) {
     }
     return (
         <div className={style.container}>
+            <img className={style.img} alt="" />
             <div >
                 <Link  to="/home">
                     <button className={style.return}>X</button>
@@ -42,6 +43,7 @@ function OneCountry(prop) {
             {aux.map((el, i) => {
                 return (
                     <div className={style.container2} key={i}>
+                         
                         <div>
                             <img
                                 className={style.image}

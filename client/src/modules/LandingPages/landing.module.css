@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Allison&display=swap");
-body {
-    background-color: #1b262c;
-}
+
 :root {
     --bg: #3c465c;
     --primary: #78ffcd;
@@ -23,11 +21,11 @@ body {
     color: #78ffcd;
     text-shadow: 2px 5px 10px white;
     position: relative;
-    margin:auto;
-  
-
+    margin: auto;
 }
 .container {
+    width: 100%;
+    height: 100%;
     padding-top: 40px;
 
     position: relative;
@@ -35,25 +33,30 @@ body {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-evenly;
-    /* border: 1px solid white; */
-    top:10vw;
+}
+.img {
+    background-image: url(../../img/landing.jpg);
 
-    /* background-color:red; */
-
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+}
+.letras {
+    position: relative;
+    margin: auto;
+    top: 12vw;
 }
 
 .button {
-    /*     position: relative;
-    left: 13vw;
-    bottom: 0;
-
-    font-weight: 600;
-    font-size: 5vw;
-    color: yellow;
-    background-color: #9d9d9d;
-    border-radius: 10px;
-    border: 1px solid #0016b0;
-    opacity: 0.5; */
     position: relative;
     margin: 0 auto;
     width: var(--btn-w);
@@ -110,11 +113,7 @@ body {
         transform: translateX(0) rotate(360deg);
     }
 }
-.text_button{
-      color:#78ffcd;
-      text-decoration: none;
+.text_button {
+    color: #78ffcd;
+    text-decoration: none;
 }
-/* .button:hover {
-    background-color: #4caf50;
-    color: white;
-} */
