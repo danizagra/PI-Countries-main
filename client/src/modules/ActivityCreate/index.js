@@ -206,7 +206,7 @@ function CreateActivity() {
                         </p>
                     )}
                 </div>
-
+                
                 <select
                     className={style.select_countries}
                     onClick={(e) => handleCreate(e)}
@@ -219,13 +219,17 @@ function CreateActivity() {
                             {el.name}
                         </option>
                     ))}
+                    
                 </select>
 
+                {arrayId.length>=1?<label className={style.continue}>You can choose more than one(1) country</label>:<label hidden></label>}
+                
                 {errors.country && (
                     <label className={style.danger}>
                         &nbsp;&nbsp;{errors.country}
                     </label>
                 )}
+               
 
                 {validateerror === true ? (
                     <button className={style.button} type="submit" disabled>

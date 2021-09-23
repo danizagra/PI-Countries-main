@@ -27,37 +27,28 @@ export function getActivity() {
 
 export function postActivity(payload) {
     return async function (dispatch) {
-        
-        const response = await axios.post(ACTIVITY_URL, payload)
-        /* console.log(response, '<<<< response del action') */
-        return response
-    }
-}
+        const response = await axios.post(ACTIVITY_URL, payload);
+
+        return response;
+    };
+} 
 
 export function oneCountry(payload) {
+   
     return async function (dispatch) {
         try {
-            const json = await axios.get(SEARCH_URL + payload)
+            const json = await axios.get( /* "http://localhost:3001/countries/"  */   SEARCH_URL + payload);
             return dispatch({
-                type:ONE_COUNTRY, payload: json.data
-            })
+                type: ONE_COUNTRY,
+                payload: json.data,
+            });
         } catch (err) {
             console.log(err);
         }
-    }
+    };
 }
 
 export function getNameCountries(payload) {
-   /*  return async function (dispatch) {
-        try {
-            const json = await axios.get(SEARCH_URL + name)
-            return dispatch({
-                type:'SEARCH_COUNTRIES', payload: json.data
-            })
-        } catch (err) {
-            console.log(err);
-        }
-    } */
     return {
         type: "SEARCH_COUNTRIES",
         payload,
@@ -65,7 +56,6 @@ export function getNameCountries(payload) {
 }
 
 export function filterCountryByContinent(payload) {
-    
     return {
         type: "FILTER_BY_CONTINENT",
         payload,
@@ -73,7 +63,6 @@ export function filterCountryByContinent(payload) {
 }
 
 export function orderCountries(payload) {
-   
     return {
         type: "ORDER_COUNTRIES",
         payload,
@@ -81,16 +70,13 @@ export function orderCountries(payload) {
 }
 
 export function orderActivities(payload) {
-    
     return {
         type: "ORDER_ACTIVITIES",
-          payload,
-       
+        payload,
     };
 }
 
 export function mix() {
-     
     return {
         type: "MIX",
     };

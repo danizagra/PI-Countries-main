@@ -5,10 +5,13 @@ import {oneCountry} from "../../store/actions/countryActions";
 import {Link} from "react-router-dom";
 import style from "./detail.module.css";
 function OneCountry(prop) {
+   
     const aux = useSelector((state) => state.aux);
     const dispatch = useDispatch();
     const id = prop.match.params.id;
-
+    console.log(aux,' esteeee')
+   
+  
     useEffect(() => {
         dispatch(oneCountry(id));
     }, [dispatch, id]);
@@ -40,7 +43,7 @@ function OneCountry(prop) {
                 </Link>
             </div>
             <div className={style.all}>
-            {aux.map((el, i) => {
+            {aux/* ['character'] */.map((el, i) => {
                 return (
                     <div className={style.container2} key={i}>
                          
@@ -49,9 +52,7 @@ function OneCountry(prop) {
                                 className={style.image}
                                 src={el.image}
                                 alt="Countries papaaaaa"
-                                /*      width="500px"
-                            height="100px" */
-                                /*  className={style.image} */
+                        
                             />
                         </div>
 
@@ -69,7 +70,7 @@ function OneCountry(prop) {
                         </div>
                         <div className={style.activity}>
                             {el.Activities.length === 0 ? (
-                                <h2>Doesn't exist activities 😢</h2>
+                                <h3>Don't exist activities 😢</h3>
                             ) : (
                                 el.Activities.map((el, i) => {
                                     return (

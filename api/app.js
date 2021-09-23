@@ -1,29 +1,17 @@
-const express = require('express');
-const morgan = require('morgan');
-const routes = require('./src/routes/index.js');
-const errorHandler = require('./src/utils/middleware/errorHandler')
-const cors = require ('cors')
-/* require('./src/db.js'); */
+const express = require("express");
+const morgan = require("morgan");
+const routes = require("./src/routes/index.js");
+const errorHandler = require("./src/utils/middleware/errorHandler");
+const cors = require("cors");
 
 const app = express();
-app.use(express.json())
-/* app.name = 'API'; */
+app.use(express.json());
 
-
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
 app.use(cors());
-/* app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  next();
-}); */
 
-app.use('/', routes);
-app.use(errorHandler)
-// Error catching endware.
-
+app.use("/", routes);
+app.use(errorHandler);
 
 module.exports = app;

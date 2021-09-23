@@ -84,6 +84,11 @@ h1 {
 }
 .danger {
     color: red;
+    margin:0;
+}
+.continue{
+    color:green;
+    margin:0;
 }
 
 .create {

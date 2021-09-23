@@ -41,6 +41,7 @@ const reducer = (state = initialState, action) => {
             };
 
         case ONE_COUNTRY:
+
             return {...state, aux: action.payload};
 
         case SEARCH_COUNTRIES:
