@@ -20,8 +20,6 @@ function CountryCards() {
     const countries = useSelector((state) => state.countries);
     const activities = useSelector((state) => state.activities);
 
-  
-
     //Verifico todas las actividades para no REPETIR
     const activitiesMap = Array.from(new Set(activities.map((e) => e.name)));
 
@@ -43,7 +41,6 @@ function CountryCards() {
         setCurrentPage(pageNumber);
     };
 
-    
     useEffect(() => {
         dispatch(getCountries());
         dispatch(getActivity());
@@ -85,7 +82,7 @@ function CountryCards() {
 
     return (
         <div className={style.container}>
-             <img className={style.img} alt="cucho" />
+            <img className={style.img} alt="cucho" />
             <div className={style.filter}>
                 <div className={style.search}>
                     <Nav />
@@ -117,8 +114,14 @@ function CountryCards() {
                             <option value="none">None</option>
                             <option value="asc">A - Z ⬇️</option>
                             <option value="desc">Z - A ⬆️</option>
-                            <option value='population_asc'> Population ASCENDING </option>
-                            <option value='population_desc'> Population DESCENDING</option>
+                            <option value="population_asc">
+                                {" "}
+                                Population ASCENDING{" "}
+                            </option>
+                            <option value="population_desc">
+                                {" "}
+                                Population DESCENDING
+                            </option>
                         </select>
 
                         <select
@@ -136,7 +139,7 @@ function CountryCards() {
                         </select>
                     </div>
                 </div>
-
+                            
                 <div className={style.checkbox}>
                     {activitiesMap?.map((el, i) => {
                         return (

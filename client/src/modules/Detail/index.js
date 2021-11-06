@@ -9,9 +9,7 @@ function OneCountry(prop) {
     const aux = useSelector((state) => state.aux);
     const dispatch = useDispatch();
     const id = prop.match.params.id;
-    console.log(aux,' esteeee')
    
-  
     useEffect(() => {
         dispatch(oneCountry(id));
     }, [dispatch, id]);
@@ -43,7 +41,7 @@ function OneCountry(prop) {
                 </Link>
             </div>
             <div className={style.all}>
-            {aux/* ['character'] */.map((el, i) => {
+            {aux.map((el, i) => {
                 return (
                     <div className={style.container2} key={i}>
                          
