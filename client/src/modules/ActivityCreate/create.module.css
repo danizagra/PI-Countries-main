@@ -1,9 +1,10 @@
 h1 {
-    color: white;
+    color: #88E0EF;
 }
 .img {
     background-image: url(../../img/activity.jpg);
     z-index: -1;
+    opacity: 0.9;
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -43,23 +44,23 @@ h1 {
   
 }
 .name {
-    color: white;
+    color: #F78812;
     display: flex;
     justify-content: center;
     margin: 2vw;
 }
 .difficulty {
-    color: white;
+    color: #F78812;
    
     position: relative;
     top: 0.5vw;
 }
 .duration {
-    color: white;
+    color: #F78812;
    
 }
 .season {
-    color: white;
+    color: #F78812;
   
 }
 .select_countries {

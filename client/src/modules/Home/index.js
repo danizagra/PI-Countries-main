@@ -82,7 +82,7 @@ function CountryCards() {
 
     return (
         <div className={style.container}>
-            <img className={style.img} alt="cucho" />
+            <img className={style.img} alt="" />
             <div className={style.filter}>
                 <div className={style.search}>
                     <Nav />
@@ -191,6 +191,7 @@ function CountryCards() {
                     />
                 </div>
             </div>
+            
         </div>
     );
 }

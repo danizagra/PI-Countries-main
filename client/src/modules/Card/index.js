@@ -7,11 +7,17 @@ function Card({name, image, continent}) {
                 <h5 className={styles.country}>{name}</h5>
                 <h5 className={styles.region}>Continent: {continent}</h5>
             </div>
-            <img
-                className={styles.image}
-                src={image}
-                alt="Countries papaaaaa" /* width='16vw' height='18vw' */
-            />
+            {/* <div className={styles.stage}>
+                <div className={styles.container}>
+                    <div className={styles.ring}> */}
+                        <img
+                            className={styles.image}
+                            src={image}
+                            alt="Countries papaaaaa" /* width='16vw' height='18vw' */
+                        />
+                    {/* </div>
+                </div>
+            </div> */}
         </div>
     );
 }

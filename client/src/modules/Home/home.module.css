@@ -119,14 +119,8 @@
 }
 
 .checkbox {
-    /*  border: 1px solid black; */
-    /*   display: flex;
-      justify-content: space-around;
-     flex-wrap: wrap;
-     order:2; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    /*  background-color: #0f4c75; */
     border-radius: 15px;
     color: white;
 }

@@ -7,7 +7,7 @@
     height: 15vw;
     border-radius: 40px;
     position: relative;
-    box-shadow: -20px -90px 10px  rgba(15, 76, 117, 0.4)/*  #F3A31B */ inset;
+    box-shadow: -20px -60px 10px  rgba(15, 76, 117, 0.4)/*  #F3A31B */ inset;
     text-decoration: none;
    
 }
@@ -30,7 +30,7 @@
 .region {
       display: flex;
       position: absolute;
-      top: 4vw;
+      top: 6vw;
       left: 1vw;
       z-index: 2;
       font-family: 'Dosis', sans-serif;
@@ -49,6 +49,7 @@
     z-index: -1;
    
 }
+
 
 
 

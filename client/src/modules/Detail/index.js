@@ -63,8 +63,8 @@ function OneCountry(prop) {
                             <h5>{el.id}</h5>
                             <h5>Capital: {el.capital}</h5>
                             <h5>Subregion: {el.subregion}</h5>
-                            <h5>Area: {numberSeparate(el.area)}</h5>
-                            <h5>Population:{numberSeparate(el.population)}</h5>
+                            <h5>Area: {numberSeparate(el.area)} m2</h5>
+                            <h5>Population:{numberSeparate(el.population)} people</h5>
                         </div>
                         <div className={style.activity}>
                             {el.Activities.length === 0 ? (
